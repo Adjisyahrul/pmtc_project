@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pmtc_project/locator/locator.dart';
-import 'package:pmtc_project/login/model/loginModel.dart';
-import 'package:pmtc_project/login/services/login_services.dart';
-import 'package:pmtc_project/screens/home.dart';
-import 'package:pmtc_project/login/view_models/login_viewModels.dart';
-import 'package:pmtc_project/login/view_models/login_viewModels.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import '../login/view_models/login_viewModels.dart';
+import 'home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -123,15 +119,17 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(7.0))))),
                 ElevatedButton(
-                    onPressed: () {
-                      final test = loginViewModel.login(
+                    onPressed: () async {
+                      final user = await loginViewModel.login(
                           usernameController.text, passwordController.text);
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Home(),
-                          ));
+                      if (user != null) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Home(),
+                            ));
+                      }
                     },
                     child: Text("Masuk")),
               ],
@@ -141,18 +139,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  //  Future<User?> signInUsingEmailPassword({required String email, required String password, required BuildContext context})async{
-  //   FirebaseAuth auth = FirebaseAuth.instance;
-  //   User? user;
-  //   try{
-  //     UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
-  //     user = userCredential.user;
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-  //   }on FirebaseAuthException catch(e){
-  //     if(e.code=="user-not-found"){
-  //       print("No user found for that email");
-  //     }
-  //   }
-  //   return user;
-  // }
 }

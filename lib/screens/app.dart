@@ -1,26 +1,34 @@
-import 'package:pmtc_project/screens/login.dart';
 import 'package:flutter/material.dart';
-import 'package:pmtc_project/screens/home.dart';
 import 'package:google_fonts/google_fonts.dart';
-class PMTCApp extends StatefulWidget {
-  const PMTCApp({Key? key}) : super(key: key);
+import 'package:firebase_auth/firebase_auth.dart';
 
-  @override
-  State<PMTCApp> createState() => _PMTCAppState();
-}
+import 'home.dart';
+import 'login.dart';
 
-class _PMTCAppState extends State<PMTCApp> {
+class PMTCApp extends StatelessWidget {
+  const PMTCApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context).textTheme
+        theme: ThemeData(
+          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
         ),
+        home: const AuthController());
+  }
+}
 
-      ),
-      routes: {
-      '/': (BuildContext context) => LoginPage(),
-    });
+class AuthController extends StatelessWidget {
+  const AuthController({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData) return const LoginPage();
+        return const Home();
+      },
+    );
   }
 }

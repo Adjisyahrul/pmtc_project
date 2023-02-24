@@ -14,11 +14,11 @@ class AlatCard extends StatelessWidget {
     var days = 0;
     if (alat.history != null) {
       days = (DateTime.now().millisecondsSinceEpoch -
-                  (alat.history?.first.timestamp.millisecondsSinceEpoch ?? 0)) /
-              1000 /
-              60 /
-              60 ~/
-              24;
+              (alat.history?.first.timestamp.millisecondsSinceEpoch ?? 0)) /
+          1000 /
+          60 /
+          60 ~/
+          24;
     }
 
     return Card(
@@ -29,7 +29,7 @@ class AlatCard extends StatelessWidget {
       child: ListTile(
         onTap: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const AlatScreen()));
+              MaterialPageRoute(builder: (context) => AlatScreen(alat: alat)));
         },
         leading: // fixed width and height
             Image.asset("Images/Logo_MTC.png"),

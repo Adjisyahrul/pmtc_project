@@ -2,8 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmtc_project/screens/alat_screen.dart';
 import 'package:pmtc_project/utils/font.dart';
-import 'package:pmtc_project/widget/alat_card.dart';
-import 'package:pmtc_project/widget/container_pembatas.dart';
+import 'package:pmtc_project/widget/divider.dart';
 
 import 'dashboard.dart';
 import 'tambah_alat.dart';
@@ -62,8 +61,6 @@ class _HomeState extends State<Home> {
   }
 }
 
-DateTime? _dateTime;
-
 class ActionSection extends StatefulWidget {
   const ActionSection({Key? key}) : super(key: key);
 
@@ -118,7 +115,7 @@ class Saya extends StatelessWidget {
                 ],
               ),
             ),
-            container_pembatas,
+            divider,
             Container(
                 padding: EdgeInsets.only(top: 15, left: 24, right: 25),
                 child: Column(

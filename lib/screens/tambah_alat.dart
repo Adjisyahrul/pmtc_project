@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pmtc_project/model/alat.dart';
 import 'package:pmtc_project/utils/colors.dart';
 import 'package:pmtc_project/utils/font.dart';
-import 'package:pmtc_project/widget/container_pembatas.dart';
+import 'package:pmtc_project/widget/divider.dart';
 
 import '../constants/alat.dart';
 
@@ -28,7 +28,8 @@ class _TambahAlatState extends State<TambahAlat> {
 
   final alatRef =
       FirebaseFirestore.instance.collection('alat').withConverter<Alat>(
-            fromFirestore: (snapshot, _) => Alat.fromJson(snapshot.data()!),
+            fromFirestore: (snapshot, _) =>
+                Alat.fromJson(snapshot.id, snapshot.data()!),
             toFirestore: (alat, _) => alat.toJson(),
           );
 
@@ -214,7 +215,7 @@ class _TambahAlatState extends State<TambahAlat> {
                   ],
                 ),
               ),
-              container_pembatas,
+              divider,
               Container(
                 padding: const EdgeInsets.only(
                     top: 16, left: 24, right: 25, bottom: 16),
@@ -255,7 +256,7 @@ class _TambahAlatState extends State<TambahAlat> {
                   ],
                 ),
               ),
-              container_pembatas,
+              divider,
               Container(
                 padding: EdgeInsets.only(top: 16, left: 24, right: 25),
                 child: Column(
@@ -345,7 +346,7 @@ class _TambahAlatState extends State<TambahAlat> {
                   ],
                 ),
               ),
-              container_pembatas,
+              divider,
               Container(
                 padding: EdgeInsets.only(top: 16, left: 24, right: 25),
                 child: Column(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-var container_pembatas = Container(
+var divider = Container(
   height: 8,
   width: double.infinity,
-  color: Color(0xFFd3d3d3),
+  color: const Color(0xFFd3d3d3),
 );

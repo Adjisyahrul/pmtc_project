@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class History {
   final DateTime timestamp;
-  final List<String> action;
+  final List<bool> action;
 
   History({
     required this.timestamp,
@@ -13,7 +13,7 @@ class History {
       : this(
           timestamp: (json['timestamp']! as Timestamp).toDate(),
           action: (json['action']! as List<dynamic>).map((a) {
-            return a.toString();
+            return a as bool;
           }).toList(),
         );
 

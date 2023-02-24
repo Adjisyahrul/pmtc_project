@@ -38,7 +38,7 @@ class Dashboard extends StatelessWidget {
                       .collection('alat')
                       .withConverter<Alat>(
                         fromFirestore: (snapshot, _) =>
-                            Alat.fromJson(snapshot.data()!),
+                            Alat.fromJson(snapshot.id, snapshot.data()!),
                         toFirestore: (alat, _) => alat.toJson(),
                       )
                       .snapshots(),

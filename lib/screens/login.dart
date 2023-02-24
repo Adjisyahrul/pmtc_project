@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../login/view_models/login_viewModels.dart';
 import 'home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,16 +12,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginViewModel loginViewModel = LoginViewModel();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     usernameController.dispose();
     passwordController.dispose();
+  }
+
+  Future login(String emailAddress, String password) async {
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailAddress, password: password);
+      final user = credential.user;
+      return user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        if (kDebugMode) {
+          print('No user found for that email.');
+        }
+      } else if (e.code == 'wrong-password') {
+        if (kDebugMode) {
+          print('Wrong password provided for that user.');
+        }
+      }
+    }
   }
 
   @override
@@ -120,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                                 BorderRadius.all(Radius.circular(7.0))))),
                 ElevatedButton(
                     onPressed: () async {
-                      final user = await loginViewModel.login(
+                      final user = await login(
                           usernameController.text, passwordController.text);
 
                       if (user != null) {

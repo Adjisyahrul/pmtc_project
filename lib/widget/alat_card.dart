@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:pmtc_project/screens/Alat.dart';
+import 'package:pmtc_project/model/alat.dart';
+import 'package:pmtc_project/screens/alat_screen.dart';
 import 'package:pmtc_project/utils/font.dart';
 import 'package:pmtc_project/utils/colors.dart';
 
+class AlatCard extends StatelessWidget {
+  final Alat alat;
 
-class card extends StatelessWidget {
-  const card({Key? key}) : super(key: key);
-
+  const AlatCard({Key? key, required this.alat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var days = 0;
+    if (alat.history != null) {
+      days = (DateTime.now().millisecondsSinceEpoch -
+                  (alat.history?.first.timestamp.millisecondsSinceEpoch ?? 0)) /
+              1000 /
+              60 /
+              60 ~/
+              24;
+    }
+
     return Card(
       margin: EdgeInsets.only(top: 10),
       shape: RoundedRectangleBorder(
@@ -17,12 +28,11 @@ class card extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12))),
       child: ListTile(
         onTap: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const Alat()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const AlatScreen()));
         },
         leading: // fixed width and height
-        Image.asset("Images/Logo_MTC.png")
-        ,
+            Image.asset("Images/Logo_MTC.png"),
         title: Text(
           "Pressure Regulator",
           style: fontLatoHeadline,
@@ -37,7 +47,7 @@ class card extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.all(5),
-                    child: Text("Air Resuscitator"),
+                    child: Text(alat.kategori),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.blueAccent),
@@ -47,10 +57,10 @@ class card extends StatelessWidget {
                   ),
                   Container(
                     padding: EdgeInsets.all(5),
-                    child: Text("Mingguan"),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Color(hijau)),
+                    child: Text(alat.interval),
                   ),
                 ],
               ),
@@ -62,7 +72,7 @@ class card extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.all(5),
-                    child: Text("Siti Hinggit"),
+                    child: Text(alat.pic),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.grey),
@@ -77,17 +87,7 @@ class card extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.all(5),
-                    child: Text("20 hari lagi"),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.redAccent),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(5),
-                    child: Text("20/11/2022"),
+                    child: Text("${days} hari lalu"),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.redAccent),

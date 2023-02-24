@@ -34,7 +34,7 @@ class AlatCard extends StatelessWidget {
         leading: // fixed width and height
             Image.asset("Images/Logo_MTC.png"),
         title: Text(
-          "Pressure Regulator",
+          alat.nama,
           style: fontLatoHeadline,
         ),
         subtitle: Column(

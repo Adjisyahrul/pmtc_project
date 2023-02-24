@@ -34,7 +34,7 @@ class Alat {
             return a.toString();
           }).toList(),
           gambar: json['gambar']! as String,
-          history: (json['history']! as List<dynamic>).map((h) {
+          history: (json['history'] as List<dynamic>?)?.map((h) {
             return History.fromJson(h);
           }).toList(),
         );

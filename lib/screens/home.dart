@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pmtc_project/screens/alat_screen.dart';
-import 'package:pmtc_project/utils/font.dart';
-import 'package:pmtc_project/widget/divider.dart';
 
 import 'dashboard.dart';
+import 'saya_screen.dart';
 import 'tambah_alat.dart';
 
 class Home extends StatefulWidget {
@@ -77,104 +74,6 @@ class _ActionSectionState extends State<ActionSection> {
       decoration: InputDecoration(
           hintText: "Action yang perlu ditambahkan", border: InputBorder.none),
     );
-  }
-}
-
-//Saya
-class Saya extends StatelessWidget {
-  const Saya({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.only(top: 84, bottom: 18),
-      children: [
-        SafeArea(
-            child: Column(
-          children: [
-            Container(
-              height: 150,
-              width: 150,
-              margin: EdgeInsets.only(bottom: 15),
-              child: ClipOval(
-                child: Image.network(
-                  'https://awsimages.detik.net.id/visual/2022/02/03/pengeboran-blok-rokan-dok-pt-pertamina-hulu-rokan.jpeg?w=650',
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    FirebaseAuth.instance.currentUser?.email ?? "No user",
-                    style: fontLatoJudul,
-                  )
-                ],
-              ),
-            ),
-            divider,
-            Container(
-                padding: EdgeInsets.only(top: 15, left: 24, right: 25),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(bottom: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Recent Activity",
-                            style: fontLatoSubJudul,
-                          )
-                        ],
-                      ),
-                    ),
-                    contohUntukBagianSaya(),
-                    contohUntukBagianSaya(),
-                    contohUntukBagianSaya(),
-                    contohUntukBagianSaya()
-                  ],
-                )),
-          ],
-        ))
-      ],
-    );
-  }
-}
-
-class contohUntukBagianSaya extends StatelessWidget {
-  const contohUntukBagianSaya({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const AlatScreen()));
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-              child: Container(
-            margin: EdgeInsets.only(bottom: 8),
-            padding: EdgeInsets.only(left: 8, top: 10, right: 8, bottom: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                border: Border.all(width: 1)),
-            child: Text(
-              "Pressure Regulator pada Pemeriksaan Mingguan  telah diupdate dan diperiksa  pada Minggu, 3 Desember 2022 pukul 06.55  ",
-              style: fontLatoIsi,
-              overflow: TextOverflow.clip,
-            ),
-          ))
-        ],
-      ),
-    );
-    ;
   }
 }
 

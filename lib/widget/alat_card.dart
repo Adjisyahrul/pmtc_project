@@ -28,8 +28,10 @@ class AlatCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12))),
       child: ListTile(
         onTap: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => AlatScreen(alat: alat)));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AlatScreenController(
+                    alatId: alat.id ?? "",
+                  )));
         },
         leading: // fixed width and height
             Image.asset("Images/Logo_MTC.png"),

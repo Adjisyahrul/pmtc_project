@@ -1,10 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'package:pmtc_project/model/alat.dart';
 import 'package:pmtc_project/utils/font.dart';
 import 'package:pmtc_project/utils/colors.dart';
 import 'package:pmtc_project/widget/divider.dart';
+
+class AlatScreenController extends StatelessWidget {
+  final String alatId;
+
+  const AlatScreenController({Key? key, required this.alatId})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("alat")
+            .doc(alatId)
+            .withConverter<Alat>(
+          fromFirestore: (snapshot, _) =>
+              Alat.fromJson(snapshot.id, snapshot.data()!),
+          toFirestore: (alat, _) => alat.toJson(),
+        )
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Text("Loading...");
+          }
+
+          final alat = snapshot.data!.data()!;
+          return AlatScreen(alat: alat);
+        });
+  }
+}
 
 class AlatScreen extends StatefulWidget {
   final Alat? alat;
@@ -21,6 +51,8 @@ class _AlatScreenState extends State<AlatScreen> {
   final pemeriksaController = TextEditingController();
 
   late DocumentReference alatRef;
+  final CollectionReference notifRef =
+  FirebaseFirestore.instance.collection("notif");
 
   @override
   void initState() {
@@ -45,6 +77,7 @@ class _AlatScreenState extends State<AlatScreen> {
 
   void submit() async {
     if (widget.alat == null) return;
+
     await alatRef.update({
       'history': FieldValue.arrayUnion([
         {
@@ -54,6 +87,11 @@ class _AlatScreenState extends State<AlatScreen> {
           'deskripsi': deskripsiController.text,
         }
       ]),
+    });
+
+    await notifRef.add({
+      'timestamp': Timestamp.now(),
+      'id': widget.alat!.id,
     });
 
     ScaffoldMessenger.of(context)
@@ -74,9 +112,11 @@ class _AlatScreenState extends State<AlatScreen> {
 
     var days = 0;
     if (widget.alat?.history != null) {
-      days = (DateTime.now().millisecondsSinceEpoch -
-              (widget.alat?.history?.first.timestamp.millisecondsSinceEpoch ??
-                  0)) /
+      days = (DateTime
+          .now()
+          .millisecondsSinceEpoch -
+          (widget.alat?.history?.first.timestamp.millisecondsSinceEpoch ??
+              0)) /
           1000 /
           60 /
           60 ~/
@@ -233,10 +273,10 @@ class _AlatScreenState extends State<AlatScreen> {
                             children: [
                               Expanded(
                                   child: Text(
-                                e.value,
-                                style: fontLatoIsi,
-                                overflow: TextOverflow.clip,
-                              )),
+                                    e.value,
+                                    style: fontLatoIsi,
+                                    overflow: TextOverflow.clip,
+                                  )),
                               SizedBox(width: 16),
                               Row(
                                 children: [
@@ -270,7 +310,7 @@ class _AlatScreenState extends State<AlatScreen> {
               ),
               Container(
                 padding:
-                    EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 16),
+                EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 16),
                 child: Column(
                   children: [
                     Row(children: [
@@ -328,7 +368,10 @@ class _AlatScreenState extends State<AlatScreen> {
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   children:
-                      (widget.alat?.history ?? []).asMap().entries.map((e) {
+                  (widget.alat?.history ?? [])
+                      .asMap()
+                      .entries
+                      .map((e) {
                     return Column(children: [
                       Text("#${(widget.alat?.history?.length ?? 0) - e.key}"),
                       Row(
@@ -360,10 +403,10 @@ class _AlatScreenState extends State<AlatScreen> {
                               children: [
                                 Expanded(
                                     child: Text(
-                                  ee.value,
-                                  style: fontLatoIsi,
-                                  overflow: TextOverflow.clip,
-                                )),
+                                      ee.value,
+                                      style: fontLatoIsi,
+                                      overflow: TextOverflow.clip,
+                                    )),
                                 SizedBox(width: 16),
                                 e.value.action[ee.key]
                                     ? Icon(Icons.check_box)

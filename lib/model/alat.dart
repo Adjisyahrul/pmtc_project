@@ -1,6 +1,7 @@
 import 'package:pmtc_project/model/history.dart';
 
 class Alat {
+  final String? id;
   final String nama;
   final String kategori;
   final String interval;
@@ -14,7 +15,8 @@ class Alat {
   final List<History>? history;
 
   Alat(
-      {required this.nama,
+      {this.id,
+      required this.nama,
       required this.kategori,
       required this.interval,
       required this.pic,
@@ -23,8 +25,9 @@ class Alat {
       required this.gambar,
       this.history});
 
-  Alat.fromJson(Map<String, Object?> json)
+  Alat.fromJson(String id, Map<String, Object?> json)
       : this(
+          id: id,
           nama: json['nama']! as String,
           kategori: json['kategori']! as String,
           interval: json['interval']! as String,

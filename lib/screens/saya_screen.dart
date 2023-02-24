@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmtc_project/model/notif.dart';
+import 'package:pmtc_project/screens/login.dart';
 import 'package:pmtc_project/widget/notifikasi.dart';
 
-import '../model/alat.dart';
 import '../utils/font.dart';
 import '../widget/divider.dart';
 
@@ -32,13 +32,23 @@ class Saya extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(bottom: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
                 children: [
+                  Text(
+                    FirebaseAuth.instance.currentUser?.displayName ?? "-",
+                    style: fontLatoJudul,
+                  ),
                   Text(
                     FirebaseAuth.instance.currentUser?.email ?? "No user",
                     style: fontLatoJudul,
-                  )
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginPage()));
+                      },
+                      child: Text("Sign out"))
                 ],
               ),
             ),

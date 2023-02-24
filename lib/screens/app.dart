@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pmtc_project/screens/home_marketing.dart';
 
 import 'home.dart';
 import 'login.dart';
@@ -27,6 +28,10 @@ class AuthController extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, AsyncSnapshot snapshot) {
         if (!snapshot.hasData) return const LoginPage();
+
+        if (snapshot.data.email == "marketingadmin@pmtc.id") {
+          return const HomeMarketing();
+        }
         return const Home();
       },
     );

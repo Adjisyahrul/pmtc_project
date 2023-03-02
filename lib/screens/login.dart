@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'home.dart';
-
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -68,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     child: Center(
                         child: Text(
-                      "Masuk",
+                      "Sign in",
                       style: TextStyle(fontSize: 18),
                     )),
                     margin: EdgeInsets.only(bottom: 20),
@@ -138,16 +136,8 @@ class _LoginPageState extends State<LoginPage> {
                                 BorderRadius.all(Radius.circular(7.0))))),
                 ElevatedButton(
                     onPressed: () async {
-                      final user = await login(
+                      await login(
                           usernameController.text, passwordController.text);
-
-                      if (user != null) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Home(),
-                            ));
-                      }
                     },
                     child: Text("Masuk")),
               ],

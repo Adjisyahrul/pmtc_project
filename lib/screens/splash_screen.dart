@@ -2,24 +2,19 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:pmtc_project/screens/login.dart';
 
-
-
-class SplashScreen extends StatefulWidget{
-
+class SplashScreen extends StatefulWidget {
   _SplashScreen createState() => _SplashScreen();
-
 }
 
-class _SplashScreen extends State<SplashScreen>{
-
-  void initState(){
+class _SplashScreen extends State<SplashScreen> {
+  void initState() {
     super.initState();
     splashscreenStart();
   }
 
-  splashscreenStart() async{
+  splashscreenStart() async {
     var duration = const Duration(seconds: 3);
-    return Timer(duration, (){
+    return Timer(duration, () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => LoginPage()),
@@ -28,8 +23,7 @@ class _SplashScreen extends State<SplashScreen>{
   }
 
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
@@ -40,21 +34,20 @@ class _SplashScreen extends State<SplashScreen>{
             Image.asset(
               'Images/Logo_MTC.png',
             ),
-
-            SizedBox(height: 24.0,),
-
-            Text("PMTC Inventory",
+            SizedBox(
+              height: 24.0,
+            ),
+            Text(
+              "PMTC Inventory",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 30.0,
               ),
             ),
-
           ],
         ),
       ),
     );
   }
-
 }

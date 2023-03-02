@@ -89,7 +89,7 @@ class AlatCard extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.all(5),
-                    child: Text("${days} hari lalu"),
+                    child: Text("${days} hari yang lalu"),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.redAccent),

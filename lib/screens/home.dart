@@ -14,11 +14,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedItems = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Dashboard(),
-    TambahAlat(),
-    RiwayatPemeriksaan(),
-    Saya()
+  final List<Widget> _widgetOptions = <Widget>[
+    const Dashboard(),
+    const TambahAlat(),
+    const RiwayatPemeriksaan(),
+    const Saya()
   ];
 
   void onItemTapped(int index) {
@@ -33,7 +33,6 @@ class _HomeState extends State<Home> {
       body: _widgetOptions.elementAt(_selectedItems),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        // <-- This works for fixed
         selectedItemColor: Colors.blueAccent,
         unselectedItemColor: Colors.grey,
         items: const <BottomNavigationBarItem>[

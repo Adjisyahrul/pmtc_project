@@ -219,7 +219,7 @@ class _AlatScreenState extends State<AlatScreen> {
                   children: [
                     Container(
                       padding: EdgeInsets.all(5),
-                      child: Text("Terakhir diperiksa ${days} hari lalu",
+                      child: Text("Terakhir diperiksa ${days} hari yang lalu",
                           style: fontLatoIsi),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),

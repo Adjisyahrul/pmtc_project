@@ -27,12 +27,17 @@ class AuthController extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+
         if (!snapshot.hasData) return const LoginPage();
 
         if (snapshot.data.email == "marketingadmin@pmtc.id") {
           return const HomeMarketing();
+        } else {
+          return const Home();
         }
-        return const Home();
       },
     );
   }

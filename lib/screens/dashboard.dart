@@ -30,7 +30,7 @@ class Dashboard extends StatelessWidget {
                 ),
               ),
               const Text(
-                "Tenggat Waktu Pemeriksaan",
+                "List Pemeriksaan Alat",
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               StreamBuilder(

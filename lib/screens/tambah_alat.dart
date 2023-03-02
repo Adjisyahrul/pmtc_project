@@ -227,7 +227,7 @@ class _TambahAlatState extends State<TambahAlat> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Penanggung Jawab",
+                          "PIC",
                           style: fontLatoJudul,
                         )
                       ],
@@ -247,7 +247,7 @@ class _TambahAlatState extends State<TambahAlat> {
                             controller: picController,
                             style: fontLatoSubJudul,
                             decoration: const InputDecoration(
-                              hintText: "Nama Penanggungjawab",
+                              hintText: "Nama PIC",
                             ),
                           ),
                         )),

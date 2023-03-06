@@ -1,59 +1,59 @@
-// import 'package:pmtc_project/model/history.dart';
-//
-// class Alat {
-//   final String? id;
-//   final String nama;
-//   final String kategori;
-//   final String interval;
-//
-//   final String pic;
-//   final String kreator;
-//
-//   final List<String> action;
-//   final String gambar;
-//
-//   final List<History>? history;
-//
-//   Alat(
-//       {this.id,
-//         required this.nama,
-//         required this.kategori,
-//         required this.interval,
-//         required this.pic,
-//         required this.kreator,
-//         required this.action,
-//         required this.gambar,
-//         this.history});
-//
-//   Alat.fromJson(String id, Map<String, Object?> json)
-//       : this(
-//     id: id,
-//     nama: json['nama']! as String,
-//     kategori: json['kategori']! as String,
-//     interval: json['interval']! as String,
-//     pic: json['pic']! as String,
-//     kreator: json['kreator']! as String,
-//     action: (json['action']! as List<dynamic>).map((a) {
-//       return a.toString();
-//     }).toList(),
-//     gambar: json['gambar']! as String,
-//     history: (json['history'] as List<dynamic>?)?.map((h) {
-//       return History.fromJson(h);
-//     }).toList(),
-//   );
-//
-//   Map<String, Object?> toJson() {
-//     return {
-//       'nama': nama,
-//       'kategori': kategori,
-//       'interval': interval,
-//       'pic': pic,
-//       'kreator': kreator,
-//       'action': action,
-//       'gambar': gambar,
-//       'history': history?.map((h) {
-//         return h.toJson();
-//       })
-//     };
-//   }
-// }
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class Perusahaan {
+  final String? id;
+  final String nama;
+  final String alamat;
+  final String pic;
+  final String deskripsi;
+
+  final String onProcess;
+  final String delivered;
+  final String returned;
+
+  final String? keterangan;
+  final DateTime? deadline;
+
+  Perusahaan(
+      {this.id,
+      required this.nama,
+      required this.alamat,
+      required this.pic,
+      required this.deskripsi,
+      required this.onProcess,
+      required this.delivered,
+      required this.returned,
+      this.keterangan,
+      this.deadline});
+
+  Perusahaan.fromJson(String id, Map<String, Object?> json)
+      : this(
+          id: id,
+          nama: json['nama']! as String,
+          alamat: json['alamat']! as String,
+          pic: json['pic']! as String,
+          deskripsi: json['deskripsi']! as String,
+          onProcess: json['onProcess']! as String,
+          delivered: json['delivered']! as String,
+          returned: json['returned']! as String,
+          keterangan: json['keterangan'] as String,
+          deadline: json['deadline'] != null
+              ? DateTime.parse(
+                  (json['deadline']! as Timestamp).toDate().toString())
+              : null,
+        );
+
+  Map<String, Object?> toJson() {
+    return {
+      'nama': nama,
+      'alamat': alamat,
+      'pic': pic,
+      'deskripsi': deskripsi,
+      'onProcess': onProcess,
+      'delivered': delivered,
+      'returned': returned,
+      'keterangan': keterangan,
+      'deadline': deadline != null ? Timestamp.fromDate(deadline!) : null,
+    };
+  }
+}

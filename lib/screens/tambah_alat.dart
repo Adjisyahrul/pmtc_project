@@ -129,7 +129,21 @@ class _TambahAlatState extends State<TambahAlat> {
                           child: TextField(
                             controller: namaController,
                             style: fontLatoSubJudul,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                borderSide: BorderSide(
+                                  color: Colors.green,
+                                  width: 1.0,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                borderSide: BorderSide(
+                                  color: Colors.purple,
+                                  width: 2.0,
+                                ),
+                              ),
                               hintText: "Nama Alat",
                             ),
                           ),
@@ -153,6 +167,20 @@ class _TambahAlatState extends State<TambahAlat> {
                             elevation: 16,
                             style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: BorderSide(
+                                    color: Colors.green,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: BorderSide(
+                                    color: Colors.purple,
+                                    width: 2.0,
+                                  ),
+                                ),
                                 label: Text(
                               "Kategori Alat",
                               style: fontLatoIsi,
@@ -187,6 +215,20 @@ class _TambahAlatState extends State<TambahAlat> {
                               left: 10, top: 12, bottom: 11, right: 10),
                           child: DropdownButtonFormField<String>(
                             decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: BorderSide(
+                                    color: Colors.green,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: BorderSide(
+                                    color: Colors.purple,
+                                    width: 2.0,
+                                  ),
+                                ),
                                 label: Text(
                               "Jenis Pemeriksaan",
                               style: fontLatoIsi,
@@ -246,7 +288,21 @@ class _TambahAlatState extends State<TambahAlat> {
                           child: TextField(
                             controller: picController,
                             style: fontLatoSubJudul,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                borderSide: BorderSide(
+                                  color: Colors.green,
+                                  width: 1.0,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                borderSide: BorderSide(
+                                  color: Colors.purple,
+                                  width: 2.0,
+                                ),
+                              ),
                               hintText: "Nama PIC",
                             ),
                           ),
@@ -304,6 +360,20 @@ class _TambahAlatState extends State<TambahAlat> {
                                 child: TextField(
                                   controller: actionController,
                                   decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                        borderSide: BorderSide(
+                                          color: Colors.green,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                        borderSide: BorderSide(
+                                          color: Colors.purple,
+                                          width: 2.0,
+                                        ),
+                                      ),
                                       hintText: "Action yang perlu ditambahkan",
                                       border: InputBorder.none),
                                 ))),
